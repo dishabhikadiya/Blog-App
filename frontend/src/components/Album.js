@@ -26,8 +26,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import "../Album.css";
-// import UploadAdapterPlugin from "@ckeditor/ckeditor5-upload/src/adapters/uploadadapter";
-
 const Album = () => {
   const [blogs, setBlogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -91,10 +89,13 @@ const Album = () => {
     const isDescriptionValid = validateDescription();
     if (isTitleValid && isDescriptionValid) {
       try {
-        const response = await axios.post("http://localhost:3000/api/blog", {
-          title: title,
-          description: description,
-        });
+        const response = await axios.post(
+          "blog-app-virid-rho.vercel.app/api/blog",
+          {
+            title: title,
+            description: description,
+          }
+        );
         setIsLoading(false);
         setDescription("");
         setTitle("");
@@ -112,7 +113,7 @@ const Album = () => {
     if (searchQuery) {
       addQuery = addQuery + `?title=${searchQuery}`;
     }
-    fetch(`http://localhost:3000/api/getblog${addQuery}`)
+    fetch(`blog-app-virid-rho.vercel.app/api/getblog${addQuery}`)
       .then((response) => response.json())
       .then((data) => {
         setBlogs(data.task);
@@ -146,7 +147,7 @@ const Album = () => {
     console.log("id", blogId);
     try {
       const response = await fetch(
-        `http://localhost:3000/api/deleteData/${blogId}`,
+        `blog-app-virid-rho.vercel.app/api/deleteData/${blogId}`,
         {
           method: "DELETE",
           headers: {
@@ -174,7 +175,7 @@ const Album = () => {
     try {
       console.log("blogId", blogId);
       const response = await axios.put(
-        `http://localhost:3000/api/updateblog/${blogId}`,
+        `blog-app-virid-rho.vercel.app/api/updateblog/${blogId}`,
         {
           title: updatetitle,
           description: updatedescription,

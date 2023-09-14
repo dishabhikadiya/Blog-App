@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Album from "./components/Album";
-
 function App() {
   return (
     <Routes>
