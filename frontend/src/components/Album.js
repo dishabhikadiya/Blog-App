@@ -89,13 +89,10 @@ const Album = () => {
     const isDescriptionValid = validateDescription();
     if (isTitleValid && isDescriptionValid) {
       try {
-        const response = await axios.post(
-          "blog-app-virid-rho.vercel.app/api/blog",
-          {
-            title: title,
-            description: description,
-          }
-        );
+        const response = await axios.post("http://localhost:3000/api/blog", {
+          title: title,
+          description: description,
+        });
         setIsLoading(false);
         setDescription("");
         setTitle("");
@@ -113,7 +110,7 @@ const Album = () => {
     if (searchQuery) {
       addQuery = addQuery + `?title=${searchQuery}`;
     }
-    fetch(`blog-app-virid-rho.vercel.app/api/getblog${addQuery}`)
+    fetch(`http://localhost:3000/api/getblog${addQuery}`)
       .then((response) => response.json())
       .then((data) => {
         setBlogs(data.task);
@@ -147,7 +144,7 @@ const Album = () => {
     console.log("id", blogId);
     try {
       const response = await fetch(
-        `blog-app-virid-rho.vercel.app/api/deleteData/${blogId}`,
+        `http://localhost:3000/api/deleteData/${blogId}`,
         {
           method: "DELETE",
           headers: {
@@ -175,7 +172,7 @@ const Album = () => {
     try {
       console.log("blogId", blogId);
       const response = await axios.put(
-        `blog-app-virid-rho.vercel.app/api/updateblog/${blogId}`,
+        `http://localhost:3000/api/updateblog/${blogId}`,
         {
           title: updatetitle,
           description: updatedescription,
